@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\SiteContato;
 use Illuminate\Database\Seeder;
 
 class SiteContatoSeeder extends Seeder
@@ -14,6 +14,6 @@ class SiteContatoSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $contato = new SiteContato();
     }
 }
