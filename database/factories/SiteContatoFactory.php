@@ -1,23 +1,17 @@
 <?php
 
-namespace Database\Factories;
+/** @var Factory $factory */
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\SiteContato;
+use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SiteContato>
- */
-class SiteContatoFactory extends Factory
-{
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
-    {
-        return [
-            //
-        ];
-    }
-}
+$factory->define(SiteContato::class, function (Faker $faker) {
+    return [
+        'nome' => $faker->name,
+        'telefone' => $faker->tollFreePhoneNumber,
+        'email' => $faker->unique()->email,
+        'motivo_contato' => $faker->numberBetween(1,3),
+        'mensagem' => $faker->text(200)
+    ];
+});
