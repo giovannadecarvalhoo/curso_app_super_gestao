@@ -20,9 +20,8 @@ Route::post('/contato', 'App\Http\Controllers\ContatoController@salvar')->name('
 Route::get('/login', function() { return 'Login'; })->name('site.site');
 
 
-Route::prefix('/app')->group(function() {
+Route::middleware('autenticacao')->prefix('/app')->group(function() {
     Route::get('/clientes', function() { return 'Clientes'; })->name('app.clientes');
     Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
     Route::get('/produtos', function() { return 'Clientes'; })->name('app.produtos');
-
 });

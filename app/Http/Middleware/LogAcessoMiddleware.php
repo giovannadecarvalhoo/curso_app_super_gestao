@@ -13,15 +13,17 @@ class LogAcessoMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @param Request $request
+     * @param Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return Response|RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response|RedirectResponse
     {
-        $ip = $request->server->get('REMOTE_ADDR');
-        $rota = $request->getRequestUri();
+        $ip     = $request->server->get('REMOTE_ADDR');
+        $rota   = $request->getRequestUri();
+
         LogAcesso::create(['log' => "Ip $ip requisitou a rota $rota"]);
+
         return $next($request);
     }
 }
