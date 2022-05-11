@@ -28,9 +28,14 @@ Route::middleware('autenticacao')->prefix('/app')->group(function() {
 
     Route::get('/fornecedor', 'App\Http\Controllers\FornecedorController@index')->name('app.fornecedor');
     Route::post('/fornecedor/listar', 'App\Http\Controllers\FornecedorController@listar')->name('app.fornecedor.listar');
+    Route::get('/fornecedor/listar', 'App\Http\Controllers\FornecedorController@listar')->name('app.fornecedor.listar');
     Route::get('/fornecedor/adicionar', 'App\Http\Controllers\FornecedorController@adicionar')->name('app.fornecedor.adicionar');
     Route::post('/fornecedor/adicionar', 'App\Http\Controllers\FornecedorController@adicionar')->name('app.fornecedor.adicionar');
+    Route::get('/fornecedor/editar/{id}/{msg?}', 'App\Http\Controllers\FornecedorController@editar')->name('app.fornecedor.editar');
+    Route::get('/fornecedor/excluir/{id}', 'App\Http\Controllers\FornecedorController@excluir')->name('app.fornecedor.excluir');
 
 
-    Route::get('/produto', 'App\Http\Controllers\ProdutoController@index')->name('app.produto');
+    Route::resource('produto', 'App\Http\Controllers\ProdutoController');
+    Route::resource('produto-detalhe', 'App\Http\Controllers\ProdutoDetalheController');
+
 });
