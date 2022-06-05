@@ -33,12 +33,17 @@ Route::middleware('autenticacao')->prefix('/app')->group(function() {
     Route::get('/fornecedor/editar/{id}/{msg?}', 'App\Http\Controllers\FornecedorController@editar')->name('app.fornecedor.editar');
     Route::get('/fornecedor/excluir/{id}', 'App\Http\Controllers\FornecedorController@excluir')->name('app.fornecedor.excluir');
 
-
+    //produtos
     Route::resource('produto', 'App\Http\Controllers\ProdutoController');
+
+    //produtos detalhes
     Route::resource('produto-detalhe', 'App\Http\Controllers\ProdutoDetalheController');
 
     Route::resource('cliente', 'App\Http\Controllers\ClienteController');
     Route::resource('pedido', 'App\Http\Controllers\PedidoController');
-    Route::resource('pedido-produto', 'App\Http\Controllers\PedidoProdutoController');
 
+//    Route::resource('pedido-produto', 'App\Http\Controllers\PedidoProdutoController');
+    Route::get('pedido-produto/create/{pedido}', 'App\Http\Controllers\PedidoProdutoController@create')->name('pedido-produto.create');
+    Route::post('pedido-produto/store/{pedido}', 'App\Http\Controllers\PedidoProdutoController@store')->name('pedido-produto.store');
+    Route::delete('pedido-produto.destroy/{pedidoProduto}/{pedido_id}', 'App\Http\Controllers\PedidoProdutoController@destroy')->name('pedido-produto.destroy');
 });

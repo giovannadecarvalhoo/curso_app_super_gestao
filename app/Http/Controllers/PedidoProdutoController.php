@@ -2,6 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pedido;
+use App\Models\PedidoProduto;
+use App\Models\Produto;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PedidoProdutoController extends Controller
@@ -17,24 +24,41 @@ class PedidoProdutoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Pedido $pedido
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(Pedido $pedido)
     {
-        //
+        $produtos = Produto::all();
+
+        return view('app.pedido_produto.create', ['pedido' => $pedido, 'produtos' => $produtos]);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Pedido $pedido
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Pedido $pedido)
     {
-        //
+        $regras = [
+            'produto_id' => 'exists:produtos,id',
+            'quantidade' => 'required'
+        ];
+
+        $feedback = [
+            'produto_id.exists' => 'O produto informado não existe',
+            'required' => 'O campo :attribute deve possuir um valor válido'
+        ];
+
+        $request->validate($regras, $feedback);
+
+        $pedido->produtos()->attach([
+            $request->get('produto_id') => ['quantidade' => $request->get('quantidade')]
+        ]);
+
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);
+
     }
 
     /**
@@ -72,13 +96,14 @@ class PedidoProdutoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param PedidoProduto $pedidoProduto
+     * @param $pedido_id
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(PedidoProduto $pedidoProduto, $pedido_id)
     {
-        //
+        $pedidoProduto->delete();
+
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido_id]);
     }
 }
