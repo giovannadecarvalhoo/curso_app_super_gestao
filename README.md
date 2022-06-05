@@ -1,1 +1,78 @@
 # curso_app_super_gestao
+Repositório criado para colocar em prática os exercícios do curso Desenvolvimento Web Avançado 2022 com PHP, Laravel da plataforma Udemy.
+
+## Principais recursos vistos
+- composer
+- laravel
+- artisan
+- routes
+  - metodos
+    - get
+    - post
+  - prefix
+  - fallback
+  - propriedades
+    - name
+- MVC
+- blade
+  - @php
+  - @if
+  - @unless
+  - @isset
+  - @for
+  - @switch
+  - @while
+  - @foreach
+  - @forelse
+  - components
+  - partials
+  - @section
+  - $slot
+  - @include
+  - @yield
+  - @csrf (token csrf)
+- .env config
+- sqlite config
+- mysql config
+- migrations
+  - cardinalidade 1:1
+  - cardinalidade 1:n
+  - cardinalidade n:n
+  - nullable
+  - default
+  - modificador After
+  - Comandos Status, Reset, Refresh e Fresh
+- Eloquent ORM
+  - Tinker
+    - create
+    - fillable
+    - all()
+    - find()
+    - where() / orWhere()
+      - whereIn()
+      - whereNotIn()
+      - whereBetween()
+      - whereNotBetween()
+      - whereNull()
+      - whereNotNull()
+      - whereDate()
+      - whereDay()
+      - whereMonth()
+      - whereYear()
+      - whereTime()
+      - whereColumn()
+      - where(function($query){ $query->where()->orWhere(); }) //sub-consultas de operações logicas (grupos de consultas)
+    - orderBy()
+  - Collections
+    - collect([])
+    - first()
+    - last()
+    - reverse()
+    - toArray()
+    - toJson()
+    - pluck()
+    - max()
+    - min()
+
+## Documentações
+Curso [Desenvolvimento Web Avançado 2022 com PHP, Laravel e Vue.JS](https://www.udemy.com/course/curso-completo-do-desenvolvedor-laravel/).
